@@ -11,7 +11,7 @@ const Loader = () => {
     useEffect(() => {
         setLoaderState(1)
         setTimeout(()=> setLoaderState(2), 1500)
-    }, [change])
+    }, [change, setLoaderState])
     
 
   return (
