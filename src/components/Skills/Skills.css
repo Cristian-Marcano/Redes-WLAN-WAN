@@ -1,0 +1,11 @@
+.skills{
+    padding: 30px;
+    width: calc(100% - 150px);
+    float: right;
+    height: 100vh;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
