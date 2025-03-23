@@ -81,27 +81,64 @@ const ThreeSphere = () => {
         group.add(sphere);
     
         const textos = [];
+
+        // const loadFontForTechnology = (technology, index) => {
+        //   loader.load(
+        //     "/fonts/droid/droid_sans_mono_regular.typeface.json",
+        //     (font) => {
+        //       const textGeometry = new THREE.TextBufferGeometry(technology, {
+        //         font: font,
+        //         size: Math.random() + 3,
+        //         height: 0.1,
+        //         curveSegments: 6,
+        //       });
+        //       textGeometry.center();
+        //       loadCheck ++; // Marca que la fuente se cargó
+        //       const text = new THREE.Mesh(textGeometry, textMaterial);
+        //       textos.push(text);
+        //       group.add(textos[index]); // Usa el índice para agregar al grupo
+        //     }
+        //   );
+        // };
+
+        const loadFont = (technology) => {
+          return new Promise((resolve, reject) => {
+            loader.load(
+              "/fonts/droid/droid_sans_mono_regular.typeface.json",
+              (font) => {
+                const textGeometry = new THREE.TextBufferGeometry(technology, {
+                  font: font,
+                  size: Math.random() + 3,
+                  height: 0.1,
+                  curveSegments: 6,
+                });
+                textGeometry.center();
+                const text = new THREE.Mesh(textGeometry, textMaterial);
+                resolve(text);
+              },
+              undefined,
+              (error) => reject(error)
+            );
+          });
+        };
     
         const textMaterial = new THREE.MeshBasicMaterial({ color: theme === 'light' ? "#000" : "#fff"});
         let loadCheck = false;
-        for (let i = 0; i < tecnologias.length; i++) {
-          loader.load(
-            "/fonts/droid/droid_sans_mono_regular.typeface.json",
-            (font) => {
-              const textGeometry = new THREE.TextBufferGeometry(tecnologias[i], {
-                font: font,
-                size: Math.random() + 3,
-                height: 0.1,
-                curveSegments: 6,
-              });
-              textGeometry.center();
-              loadCheck = true;
-              const text = new THREE.Mesh(textGeometry, textMaterial);
-              textos.push(text);
-              group.add(textos[i]);
-            }
-          );
-        }
+        // for (let i = 0; i < tecnologias.length; i++) {
+        //   loadFontForTechnology(tecnologias, i)
+
+        // }
+
+        // Cargar todas las tecnologías
+        Promise.all(tecnologias.map((tech) => loadFont(tech)))
+        .then((texts) => {
+          texts.forEach((text, index) => {
+            loadCheck = true
+            textos.push(text);
+            group.add(textos[index]);
+          });
+        })
+        .catch((error) => console.error("Error al cargar fuentes:", error));
     
         scene.add(group);
     
