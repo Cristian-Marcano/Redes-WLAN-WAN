@@ -75,7 +75,7 @@
 
     .extra{
         height: 120px;
-        grid-template-columns: repeat(10, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .techItem p {
@@ -90,8 +90,8 @@
     }
 
     .extra{
-        height: 270px;
-        grid-template-columns: repeat(5, 1fr);
+        height: 140px;
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 

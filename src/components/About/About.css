@@ -98,6 +98,11 @@ canvas{
     .threeContainer {
         width: 100%;
         justify-content: center;
+
+        img {
+            width: 450px;
+
+        }
     }
 }
 
@@ -129,5 +134,9 @@ canvas{
 
     .about p, .projects p {
         font-size: 10px;
+    }
+
+    .threeContainer img {
+        width: 300px;
     }
 }
