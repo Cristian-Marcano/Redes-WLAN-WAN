@@ -90,7 +90,7 @@
     }
 
     .extra{
-        height: 140px;
+        height: 120px;
         grid-template-columns: repeat(3, 1fr);
     }
 }
@@ -104,6 +104,9 @@
 @media (max-width: 600px){
     .techs img {
         width: 40px;
+    }
+    .frontend, .backend, .extra {
+        height: 100px;
     }
 }
 
